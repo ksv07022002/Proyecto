@@ -7,8 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$correo || !$contrasena) {
         $_SESSION['error_registro'] = 'Debe completar todos los campos.';
-        header('Location: index.php#register');
+        $_SESSION['tab_activa'] = 'login';
+        header('Location: index.php');
         exit;
+
+
     }
 
     $archivoUsuarios = 'usuarios.json';
@@ -23,8 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($usuarios as $usuario) {
         if ($usuario['correo'] === $correo) {
             $_SESSION['error_registro'] = 'Este correo ya está registrado.';
-            header('Location: index.php#register');
+            $_SESSION['tab_activa'] = 'register';
+            header('Location: index.php');
             exit;
+
         }
     }
 
